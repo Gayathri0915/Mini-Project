@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Marksheet - Select Class</title>
+    <style>
+        body{
+            font-family: Arial;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+        .box{
+            background: white;
+            padding: 30px;
+            margin: 100px auto;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        select, button{
+            padding: 10px;
+            width: 90%;
+            margin: 10px;
+        }
+        button{
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>View Marksheet Data</h2>
+
+    <form method="post" action="/load_view_table">
+
+        <select name="course" required>
+            <option value="">Select Course</option>
+            <option value="BCA">BCA</option>
+            <option value="BCOM">B.Com</option>
+            <option value="BSC_CS">B.Sc Computer Science</option>
+            <option value="BSC_MCA">Maths with Computer Application</option>
+            <option value="BTECH">B.Tech</option>
+            <option value="BCM">BCM</option>
+        </select>
+
+        <select name="year" required>
+            <option value="">Select Year</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+        </select>
+
+        <select name="semester" required>
+            <option value="">Select Semester</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+        </select>
+
+        <select name="section" required>
+            <option value="">Select Section</option>
+            <option value="A">Section A</option>
+            <option value="B">Section B</option>
+            <option value="C">Section C</option>
+        </select>
+
+        <button type="submit">View Data</button>
+
+    </form>
+</div>
+
+</body>
+</html>

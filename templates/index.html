@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Assure</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f2f2f2;
+            overflow: hidden;
+        }
+
+        .bg-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: url("/static/images/index.png") no-repeat center center;
+            background-size: contain;
+        }
+
+        .click-btn {
+            position: absolute;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Student click area */
+        .student-btn {
+            top: 72%;
+            left: 35%;
+            width: 22%;
+            height: 12%;
+        }
+
+        /* Faculty click area */
+        .faculty-btn {
+            top: 78%;   /* 🔥 changed */
+            left: 45%;
+            width: 22%;
+            height: 12%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-container">
+
+        <button class="click-btn student-btn"
+            onclick="window.location.href='/student'">
+        </button>
+
+        <button class="click-btn faculty-btn"
+            onclick="window.location.href='/faculty'">
+        </button>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Marksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #dbeafe, #dcfce7);
+            padding: 30px;
+        }
+
+        .main-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 14px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-box {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+            margin-left: 15px;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        .note {
+            text-align: center;
+            font-size: 12px;
+            color: gray;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main-box">
+    <h2>Update Marksheet Data</h2>
+
+    <form action="/update_marksheet" method="POST">
+
+        <div class="form-box">
+
+            <div>
+                <label>Register Number (9 digits)</label>
+                <input type="text" name="reg_no" maxlength="9" pattern="[0-9]{9}" required>
+            </div>
+
+            <div>
+                <label>Grade Sheet Number</label>
+                <input type="text" name="grade_sheet_no" maxlength="7" pattern="[A-Z][0-9]{6}" placeholder="Example: A098760" required>
+            </div>
+
+            <div>
+                <label>Date (Issued / Collected Date)</label>
+                <input type="date" name="issued_date" required>
+            </div>
+
+            <div>
+                <label>Month & Year (Exam)</label>
+                <input type="month" name="month_year" required>
+            </div>
+
+            <div style="grid-column: span 2;">
+                <label>Status</label>
+                <select name="status" required>
+                    <option value="">-- Select --</option>
+                    <option value="Available">Available</option>
+                    <option value="Not Available">Not Available</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="btn-box">
+            <button type="submit">Update Data</button>
+            <a href="/logout">
+                <button type="button" class="logout-btn">Logout</button>
+            </a>
+        </div>
+
+    </form>
+
+    <div class="note">
+        Enter correct Register No & GradeSheet No to update the existing record.
+    </div>
+</div>
+
+</body>
+</html>

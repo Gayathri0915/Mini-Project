@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Class</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .box{
+            width: 450px;
+            background: white;
+            padding: 30px;
+            margin: 120px auto;
+            border-radius: 12px;
+            box-shadow: 0px 0px 12px gray;
+            text-align: left;
+        }
+
+        h2{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label{
+            font-weight: bold;
+            display: block;
+            margin-top: 12px;
+        }
+
+        select{
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid gray;
+        }
+
+        button{
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        button:hover{
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>Select Class Details</h2>
+
+    <form method="post" action="/select_class">
+
+        <label>Course :</label>
+        <select name="course" required>
+            <option value="">-- Select Course --</option>
+            <option>BCA</option>
+            <option>BCom</option>
+            <option>BSc Computer Science</option>
+            <option>Maths with Computer Applications</option>
+            <option>BSc Maths</option>
+        </select>
+
+        <label>Year :</label>
+        <select name="year" required>
+            <option value="">-- Select Year --</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+
+        <label>Semester :</label>
+        <select name="semester" required>
+            <option value="">-- Select Semester --</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+        </select>
+
+        <label>Section :</label>
+        <select name="section" required>
+            <option value="">-- Select Section --</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+
+        <button type="submit">Proceed</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

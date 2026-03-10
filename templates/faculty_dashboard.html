@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Dashboard</title>
+    <style>
+        body{
+            font-family: Arial;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        .box{
+            width: 400px;
+            background: white;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        button{
+            width: 90%;
+            padding: 12px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .logout{
+            background-color: #f44336;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Faculty Dashboard</h2>
+
+    <button onclick="location.href='/enter_marksheet'">Enter Marksheet Data</button>
+    <button onclick="location.href='/update_select'">Update Marksheet Data</button>
+    <button onclick="location.href='/view_table'">View Marksheet Data</button>
+    <button class="logout" onclick="location.href='/'">Logout</button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Updated Marksheet Table</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #dbeafe, #dcfce7);
+            padding: 30px;
+        }
+
+        .main-box {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .btn-box {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+            margin-left: 15px;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        .msg {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+            color: green;
+        }
+
+        .error {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main-box">
+
+    <h2>Updated Marksheet Records</h2>
+
+    {% if message %}
+        <div class="error">{{ message }}</div>
+    {% else %}
+
+    <div class="msg">
+        Marksheet Data Updated Successfully!
+    </div>
+
+    <table>
+        <tr>
+            <th>Register No</th>
+            <th>Grade Sheet No</th>
+            <th>Issued Date</th>
+            <th>Month & Year</th>
+            <th>Status</th>
+        </tr>
+
+        {% for row in all_data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+
+    <div class="btn-box">
+        <a href="/update_select">
+            <button type="button">Back to Update Page</button>
+        </a>
+
+        <a href="/logout">
+            <button type="button" class="logout-btn">Logout</button>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

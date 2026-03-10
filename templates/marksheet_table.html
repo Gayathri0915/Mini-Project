@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marksheet Table</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #dbeafe, #dcfce7);
+            padding: 30px;
+        }
+
+        .main-box {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #14532d;
+        }
+
+        .msg {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th {
+            background: #16a34a;
+            color: white;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 13px;
+        }
+
+        tr:hover {
+            background: #f3f4f6;
+        }
+
+        .btn-box {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            font-size: 14px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        .note {
+            text-align: center;
+            font-size: 12px;
+            color: gray;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main-box">
+
+    <h2>Marksheet Data Saved</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="msg {{category}}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if all_data %}
+
+    <table>
+        <tr>
+            <th>Register No</th>
+            <th>Grade Sheet No</th>
+            <th>Month & Year</th>
+            <th>Status</th>
+        </tr>
+
+        {% for row in all_data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% else %}
+        <p style="text-align:center; color:red; font-weight:600;">
+            No records available
+        </p>
+    {% endif %}
+
+    <div class="btn-box">
+        <a href="/enter_marksheet" class="btn">+ Add New Data</a>
+        <a href="/faculty_dashboard" class="btn">Back to Dashboard</a>
+        <a href="/logout" class="btn logout-btn">Logout</a>
+    </div>
+
+    <div class="note">
+        Data stored successfully in the database. You can add more or return to dashboard.
+    </div>
+
+</div>
+
+</body>
+</html>

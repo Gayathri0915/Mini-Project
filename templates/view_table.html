@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Marksheet Table</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #dbeafe, #dcfce7);
+            margin: 0;
+            padding: 30px;
+        }
+
+        .main-box{
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        .search-box{
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .search-box input{
+            width: 60%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-box input:focus{
+            border: 1px solid #2563eb;
+            box-shadow: 0px 0px 6px rgba(37, 99, 235, 0.3);
+        }
+
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            margin: auto;
+            background: white;
+            margin-top: 20px;
+        }
+
+        th, td{
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        th{
+            background: #2563eb;
+            color: white;
+        }
+
+        tr:nth-child(even){
+            background: #f9fafb;
+        }
+
+        .btn-box{
+            margin-top: 25px;
+        }
+
+        button{
+            padding: 10px 25px;
+            margin: 8px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        button:hover{
+            background-color: #1d4ed8;
+        }
+
+        .logout-btn{
+            background: #dc2626;
+        }
+
+        .logout-btn:hover{
+            background: #b91c1c;
+        }
+
+        .error{
+            color: red;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main-box">
+
+<h2>View Marksheet Data</h2>
+
+{% if message %}
+    <h3 class="error">{{ message }}</h3>
+{% endif %}
+
+<!-- ✅ Search Bar -->
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Register No / GradeSheet No / Month-Year / Status..." onkeyup="searchTable()">
+</div>
+
+{% if rows %}
+<table id="marksheetTable">
+<tr>
+    <th>Register No</th>
+    <th>Grade Sheet No</th>
+    <th>Issued Date</th>
+    <th>Month & Year</th>
+    <th>Status</th>
+    <th>Updated Date</th>
+</tr>
+
+{% for r in rows %}
+<tr>
+    <td>{{ r["reg_no"] }}</td>
+    <td>{{ r["grade_sheet_no"] }}</td>
+    <td>{{ r["issued_date"] if r["issued_date"] else "-" }}</td>
+    <td>{{ r["month_year"] }}</td>
+    <td>{{ r["status"] }}</td>
+    <td>{{ r["updated_date"] if r["updated_date"] else "-" }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% else %}
+    <h3 class="error">No records found!</h3>
+{% endif %}
+
+<div class="btn-box">
+    <button onclick="location.href='/faculty_dashboard'">Back</button>
+    <button class="logout-btn" onclick="location.href='/logout'">Logout</button>
+</div>
+
+</div>
+
+<!-- ✅ JavaScript Search Function -->
+<script>
+function searchTable() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let table = document.getElementById("marksheetTable");
+    let tr = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < tr.length; i++) {
+        let rowText = tr[i].textContent.toLowerCase();
+        if (rowText.includes(input)) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>
