@@ -135,7 +135,6 @@
             margin-top: 18px;
         }
 
-        /* Responsive Fix */
         @media(max-width: 650px) {
             .form-box {
                 grid-template-columns: 1fr;
@@ -151,7 +150,6 @@
     <h2>Enter Marksheet Data</h2>
     <div class="sub-title">Fill the details and save the marksheet record</div>
 
-    <!-- Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
@@ -185,7 +183,10 @@
 
             <div>
                 <label>Month & Year (Exam)</label>
-                <input type="month" name="month_year" required>
+                <!-- ✅ ONLY CHANGE -->
+                <input type="text" name="month_year"
+                       placeholder="Ex: Nov & Dec 2019"
+                       required>
             </div>
 
             <div>

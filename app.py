@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 import sqlite3
 import re
 from datetime import datetime
-import os   # ✅ ADDED
+import os
 
 app = Flask(__name__)
 app.secret_key = "gradeassure_secret_key"
@@ -155,7 +155,7 @@ def enter_marksheet():
 def save_marksheet():
     reg_no = request.form.get("reg_no")
     grade_sheet_no = request.form.get("grade_sheet_no").strip().upper()
-    month_year = request.form.get("month_year")
+    month_year = request.form.get("month_year").strip().title()
     status = request.form.get("status")
 
     if not re.match("^[0-9]{9}$", reg_no):
@@ -169,12 +169,16 @@ def save_marksheet():
     conn = get_db()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM marksheet_data WHERE grade_sheet_no = ?", (grade_sheet_no,))
+    cursor.execute("""
+        SELECT * FROM marksheet_data 
+        WHERE grade_sheet_no = ? AND month_year = ?
+    """, (grade_sheet_no, month_year))
+
     existing = cursor.fetchone()
 
     if existing:
         conn.close()
-        flash("Duplicate Grade Sheet Number!", "error")
+        flash("Duplicate Grade Sheet Number for same month!", "error")
         return redirect(url_for("enter_marksheet"))
 
     cursor.execute("""
@@ -197,7 +201,94 @@ def save_marksheet():
     return render_template("marksheet_table.html", all_data=all_data)
 
 
+# -------------------- UPDATE MARKSHEET --------------------
+@app.route("/update_select")
+def update_select():
+    return render_template("update_select.html")
+
+
+@app.route("/update_marksheet", methods=["POST"])
+def update_marksheet():
+    reg_no = request.form.get("reg_no")
+    grade_sheet_no = request.form.get("grade_sheet_no").strip().upper()
+    issued_date = request.form.get("issued_date")
+    month_year = request.form.get("month_year")
+    status = request.form.get("status")
+
+    updated_date = datetime.now().strftime("%d-%m-%Y")
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM marksheet_data
+        WHERE reg_no = ? AND grade_sheet_no = ?
+    """, (reg_no, grade_sheet_no))
+
+    record = cursor.fetchone()
+
+    if not record:
+        conn.close()
+        return render_template("update_table.html", message="Record not found!")
+
+    cursor.execute("""
+        UPDATE marksheet_data
+        SET issued_date = ?, month_year = ?, status = ?, updated_date = ?
+        WHERE reg_no = ? AND grade_sheet_no = ?
+    """, (issued_date, month_year, status, updated_date, reg_no, grade_sheet_no))
+
+    conn.commit()
+
+    cursor.execute("""
+        SELECT reg_no, grade_sheet_no, issued_date, month_year, status, updated_date
+        FROM marksheet_data
+        ORDER BY id DESC
+    """)
+    all_data = cursor.fetchall()
+
+    conn.close()
+
+    return render_template("update_table.html", all_data=all_data)
+
+
+# -------------------- VIEW DATA --------------------
+@app.route("/view_table")
+def view_table():
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, reg_no, grade_sheet_no, issued_date, month_year, status, updated_date
+        FROM marksheet_data
+        ORDER BY id DESC
+    """)
+    all_data = cursor.fetchall()
+
+    conn.close()
+
+    return render_template("view_table.html", rows=all_data)
+
+
+# -------------------- DELETE RECORD (NEW ADDED) --------------------
+@app.route("/delete/<int:id>")
+def delete_record(id):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM marksheet_data WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("view_table"))
+
+
+# -------------------- LOGOUT --------------------
+@app.route("/logout")
+def logout():
+    return redirect(url_for("index"))
+
+
 # -------------------- RUN APP --------------------
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))   # ✅ IMPORTANT FOR RENDER
+    port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)

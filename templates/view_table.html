@@ -42,11 +42,6 @@
             font-size: 14px;
         }
 
-        .search-box input:focus{
-            border: 1px solid #2563eb;
-            box-shadow: 0px 0px 6px rgba(37, 99, 235, 0.3);
-        }
-
         table{
             border-collapse: collapse;
             width: 100%;
@@ -71,6 +66,19 @@
             background: #f9fafb;
         }
 
+        .delete-btn{
+            background: #dc2626;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+            color: white;
+            border: none;
+        }
+
+        .delete-btn:hover{
+            background: #b91c1c;
+        }
+
         .btn-box{
             margin-top: 25px;
         }
@@ -86,16 +94,8 @@
             font-weight: 600;
         }
 
-        button:hover{
-            background-color: #1d4ed8;
-        }
-
         .logout-btn{
             background: #dc2626;
-        }
-
-        .logout-btn:hover{
-            background: #b91c1c;
         }
 
         .error{
@@ -115,30 +115,38 @@
     <h3 class="error">{{ message }}</h3>
 {% endif %}
 
-<!-- ✅ Search Bar -->
 <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search Register No / GradeSheet No / Month-Year / Status..." onkeyup="searchTable()">
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchTable()">
 </div>
 
 {% if rows %}
 <table id="marksheetTable">
 <tr>
+    <th>S.No</th> <!-- ✅ NEW -->
     <th>Register No</th>
     <th>Grade Sheet No</th>
     <th>Issued Date</th>
     <th>Month & Year</th>
     <th>Status</th>
     <th>Updated Date</th>
+    <th>Action</th>
 </tr>
 
 {% for r in rows %}
 <tr>
+    <td>{{ loop.index }}</td> <!-- ✅ AUTO SERIAL -->
     <td>{{ r["reg_no"] }}</td>
     <td>{{ r["grade_sheet_no"] }}</td>
     <td>{{ r["issued_date"] if r["issued_date"] else "-" }}</td>
     <td>{{ r["month_year"] }}</td>
     <td>{{ r["status"] }}</td>
     <td>{{ r["updated_date"] if r["updated_date"] else "-" }}</td>
+
+    <td>
+        <a href="/delete/{{ r['id'] }}" onclick="return confirm('Delete this record?')">
+            <button class="delete-btn">Delete</button>
+        </a>
+    </td>
 </tr>
 {% endfor %}
 
@@ -155,7 +163,6 @@
 
 </div>
 
-<!-- ✅ JavaScript Search Function -->
 <script>
 function searchTable() {
     let input = document.getElementById("searchInput").value.toLowerCase();
@@ -164,11 +171,7 @@ function searchTable() {
 
     for (let i = 1; i < tr.length; i++) {
         let rowText = tr[i].textContent.toLowerCase();
-        if (rowText.includes(input)) {
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = "none";
-        }
+        tr[i].style.display = rowText.includes(input) ? "" : "none";
     }
 }
 </script>
