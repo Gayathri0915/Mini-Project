@@ -42,6 +42,17 @@ def init_db():
         )
     """)
 
+    # Ensure columns exist (for schema updates)
+    try:
+        cursor.execute("ALTER TABLE marksheet_data ADD COLUMN issued_date TEXT")
+    except sqlite3.OperationalError:
+        pass  # Column already exists
+
+    try:
+        cursor.execute("ALTER TABLE marksheet_data ADD COLUMN updated_date TEXT")
+    except sqlite3.OperationalError:
+        pass  # Column already exists
+
     conn.commit()
     conn.close()
 
@@ -144,6 +155,11 @@ def faculty_dashboard():
     return render_template("faculty_dashboard.html")
 
 
+@app.route("/logout")
+def logout():
+    return redirect(url_for("index"))
+
+
 # -------------------- ENTRY MARKSHEET --------------------
 @app.route("/enter_marksheet")
 def enter_marksheet():
@@ -200,4 +216,4 @@ def save_marksheet():
 # -------------------- RUN APP --------------------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))   # ✅ IMPORTANT FOR RENDER
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)

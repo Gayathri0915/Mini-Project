@@ -133,10 +133,10 @@
 
         {% for row in all_data %}
         <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
+            <td>{{ row["reg_no"] }}</td>
+            <td>{{ row["grade_sheet_no"] }}</td>
+            <td>{{ row["month_year"] }}</td>
+            <td>{{ row["status"] }}</td>
         </tr>
         {% endfor %}
     </table>
