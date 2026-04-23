@@ -154,12 +154,6 @@ def faculty_login_check():
 def faculty_dashboard():
     return render_template("faculty_dashboard.html")
 
-
-@app.route("/logout")
-def logout():
-    return redirect(url_for("index"))
-
-
 # -------------------- ENTRY MARKSHEET --------------------
 @app.route("/enter_marksheet")
 def enter_marksheet():
