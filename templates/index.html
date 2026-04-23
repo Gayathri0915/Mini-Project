@@ -1,77 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Grade Assure</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f2f2f2;
-}
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f2f2f2;
+            overflow: hidden;
+        }
 
-/* Container */
-.bg-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-}
+        .bg-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: url("/static/images/index.png") no-repeat center center;
+            background-size: 100% 100%;
+        }
 
-/* Image responsive */
-.bg-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+        .click-btn {
+            position: absolute;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 10;
+        }
 
-/* Buttons */
-.click-btn {
-    position: absolute;
-    border: none;
-    background: rgba(255,0,0,0.2); /* temporary for testing */
-    cursor: pointer;
-}
+        /* Student click area */
+        .student-btn {
+            top: 87%;
+            left: 15%;
+            width: 23%;
+            height: 8%;
+        }
 
-/* Desktop positions */
-.student-btn {
-    top: 68%;
-    left: 9%;
-    width: 40%;
-    height: 20%;
-}
-
-.faculty-btn {
-    top: 68%;
-    left: 52%;
-    width: 40%;
-    height: 20%;
-}
-
-/* 📱 Mobile Fix */
-@media (max-width: 768px) {
-    .student-btn,
-    .faculty-btn {
-        position: static;
-        width: 90%;
-        height: 50px;
-        margin: 10px auto;
-        display: block;
-        background: #007bff;
-        color: white;
-        border-radius: 8px;
-    }
-
-    .bg-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-}
+        /* Faculty click area */
+        .faculty-btn {
+            top: 87%;
+            left: 59%;
+            width: 23%;
+            height: 8%;
+        }
     </style>
 </head>
 
@@ -79,15 +55,14 @@
 
     <div class="bg-container">
 
-        <button class="click-btn student-btn"
-            onclick="window.location.href='/student'">
+        <button class="click-btn student-btn" onclick="window.location.href='/student'">
         </button>
 
-        <button class="click-btn faculty-btn"
-            onclick="window.location.href='/faculty'">
+        <button class="click-btn faculty-btn" onclick="window.location.href='/faculty'">
         </button>
 
     </div>
 
 </body>
+
 </html>
