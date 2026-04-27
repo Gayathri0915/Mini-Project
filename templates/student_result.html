@@ -157,7 +157,7 @@
                 <td>{{ row["reg_no"] }}</td>
                 <td>{{ row["grade_sheet_no"] }}</td>
                 <td>{{ row["month_year"] }}</td>
-                <td>{{ row["status"] }}</td>
+                <td>{{ 'Issued' if row["status"] == 'Not Available' else row["status"] }}</td>
                 <td>
                     {% if row["issued_date"] %}
                         {{ row["issued_date"] }}
