@@ -86,6 +86,12 @@
             font-size: 18px;
             color: gray;
         }
+
+        /* Hide browser's default eye icon (Edge/IE) */
+        input::-ms-reveal,
+        input::-ms-clear {
+            display: none;
+        }
     </style>
 </head>
 
@@ -101,7 +107,7 @@
 
         <div class="password-box">
             <input type="password" id="password" name="password" placeholder="Password" required>
-            <span class="eye" onclick="togglePassword()">👁</span>
+            <span class="eye" id="toggleIcon" onclick="togglePassword()">👁</span>
         </div>
 
         <button type="submit">Login</button>
@@ -116,10 +122,13 @@
 <script>
     function togglePassword(){
         var pass = document.getElementById("password");
+        var icon = document.getElementById("toggleIcon");
         if(pass.type === "password"){
             pass.type = "text";
+            icon.innerText = "🔒"; // Change to lock or eye-slash if preferred
         }else{
             pass.type = "password";
+            icon.innerText = "👁";
         }
     }
 </script>

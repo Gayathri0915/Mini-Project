@@ -139,7 +139,7 @@
     <td>{{ r["grade_sheet_no"] }}</td>
     <td>{{ r["issued_date"] if r["issued_date"] else "-" }}</td>
     <td>{{ r["month_year"] }}</td>
-    <td>{{ 'Issued' if r["status"] == 'Not Available' else r["status"] }}</td>
+    <td>{{ r["status"] }}</td>
     <td>{{ r["updated_date"] if r["updated_date"] else "-" }}</td>
 
     <td>
