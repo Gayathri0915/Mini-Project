@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>View Marksheet Table</title>
+    <script src="/static/disable_navigation.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -80,7 +81,8 @@
         }
 
         .btn-box{
-            margin-top: 25px;
+            margin-top: 15px;
+            margin-bottom: 25px;
         }
 
         button{
@@ -114,6 +116,11 @@
 {% if message %}
     <h3 class="error">{{ message }}</h3>
 {% endif %}
+
+<div class="btn-box">
+    <button onclick="location.href='/faculty_dashboard'">Back</button>
+    <button class="logout-btn" onclick="location.href='/logout'">Logout</button>
+</div>
 
 <div class="search-box">
     <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchTable()">
@@ -155,11 +162,6 @@
 {% else %}
     <h3 class="error">No records found!</h3>
 {% endif %}
-
-<div class="btn-box">
-    <button onclick="location.href='/faculty_dashboard'">Back</button>
-    <button class="logout-btn" onclick="location.href='/logout'">Logout</button>
-</div>
 
 </div>
 
